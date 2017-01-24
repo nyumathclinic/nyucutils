@@ -92,34 +92,6 @@ def assignments_from_html(file):
         assignments.append(WebassignMent(name=name,available=avail_date,due=due_date))
     return assignments
 
-# replace this with click stuff
-def configure():
-    """
-    configuration factory
-
-    returns a dict of configuration variables.
-
-    """
-    arg_parser = argparse.ArgumentParser()
-    arg_parser.add_argument(
-        'file',
-        help='HTML file to parse'
-    )
-    arg_parser.add_argument(
-        '-d', '--debug',
-        help="Print lots of debugging statements",
-        action="store_const", dest="loglevel", const=logging.DEBUG,
-        default=logging.WARNING,
-    )
-    arg_parser.add_argument(
-        '-v', '--verbose',
-        help="Be verbose",
-        action="store_const", dest="loglevel", const=logging.INFO,
-    )
-    config = arg_parser.parse_args()
-    logging.basicConfig(level=config.loglevel)
-    return config
-
 @click.command()
 @click.argument('input',type=click.Path(exists=True),metavar='FILE')
 @click.option('-o','--output',
