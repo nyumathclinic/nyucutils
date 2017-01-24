@@ -11,6 +11,7 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     'Click>=6.0',
+    'lxml'
     # TODO: put package requirements here
 ]
 
@@ -33,7 +34,7 @@ setup(
                  'nyucutils'},
     entry_points={
         'console_scripts': [
-            'nyucutils=nyucutils.cli:main'
+            'wacv2csv=nyucutils.vendors.webassign:assignments_from_html_to_csv'
         ]
     },
     include_package_data=True,

@@ -1,4 +1,5 @@
 import argparse
+import click
 import csv
 import datetime
 import logging
@@ -119,12 +120,21 @@ def configure():
     logging.basicConfig(level=config.loglevel)
     return config
 
-def assignments_from_html_to_csv():
+@click.command()
+@click.argument('input',type=click.Path(exists=True),metavar='FILE')
+@click.option('-o','--output',
+    type=click.File('w'),
+    default='-',
+    help='write to this file'
+)
+@click.option('-d','--debug',is_flag=True,default=False,help='print lots of debugging statments')
+@click.option('-v','--verbose',is_flag=True,default=False,help="Be verbose")
+def assignments_from_html_to_csv(input,output,debug,verbose):
     """Extract assignments from HTML page and export CSV
     """
-    config=configure()
-    assignments = get_assignments(config.file)
-    writer = csv.writer(sys.stdout)
+    logging.basicConfig(level=(logging.DEBUG if debug else (logging.INFO if verbose else logging.WARNING)))
+    assignments = assignments_from_html(input)
+    writer = csv.writer(output)
     writer.writerow(["startDate","endDate","announcementText"])
     for assignment in assignments:
         writer.writerow([isodate_format(assignment.available),
