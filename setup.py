@@ -11,7 +11,8 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     'Click>=6.0',
-    'lxml'
+    'lxml>=3.7.2',
+    'Pandas>=0.19.2'
     # TODO: put package requirements here
 ]
 
@@ -34,7 +35,10 @@ setup(
                  'nyucutils'},
     entry_points={
         'console_scripts': [
-            'wacv2csv=nyucutils.vendors.webassign:assignments_from_html_to_csv'
+            'wacv2csv=nyucutils.vendors.webassign:assignments_from_html_to_csv',
+            'wa2nyuc=nyucutils.vendors.webassign:wagb_to_nyucgb',
+            'nyuc2gs=nyucutils.vendors.gradescope:munge',
+            'gs2nyuc=nyucutils.vendors.gradescope:gs2nyuc'
         ]
     },
     include_package_data=True,
