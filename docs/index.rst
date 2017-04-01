@@ -1,5 +1,5 @@
-Welcome to NYU Classes utilities's documentation!
-======================================
+nyucutils: NYU Classes Utilities
+================================
 
 Contents:
 
